@@ -112,7 +112,8 @@ const ExpenseForm = () => {
           type="date"
           className="w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/20 text-white"
           ref={date}
-          placeholder="Select date"
+          onFocus={(e) => (e.target.placeholder = "")}
+          onBlur={(e) => (e.target.placeholder = "Select date")}
         />
       </div>
       <div className="mb-2 md:mb-6 text-sm">

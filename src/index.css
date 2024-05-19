@@ -5,3 +5,7 @@
 ::-webkit-scrollbar{
   width: 0px;
 }
+input[type="date"] {
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
