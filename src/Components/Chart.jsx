@@ -77,8 +77,6 @@ const options = {
 };
 
 function BarChart({ title, expenseArray, label }) {
-  console.log(label)
-  console.log(expenseArray)
   const [data, setData] = useState(null);
 
   const loadChart = () => {

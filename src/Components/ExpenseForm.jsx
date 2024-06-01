@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../utils/expenseSlice";
 import SelectWithAddOption from "./Select";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({isOpen}) => {
   const [loading, setLoading] = useState(false);
   const [showBtn, setShowBtn] = useState(false);
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const ExpenseForm = () => {
       setLoading(false);
     }
   };
-  if (!showBtn) {
+  if (!showBtn ) {
     return (
       <button
         onClick={() => setShowBtn(true)}

@@ -8,14 +8,20 @@ const expenseSlice = createSlice({
             return action.payload;
         },
         addExpense: (state, action) => {
-            return [...state, action.payload];
+            return [action.payload, ...state];
         },
         clearExpense: (state, action) => {
             return null;
+        },
+        removeExpense: (state, action) => {
+            const { id } = action.payload;
+            const updatedExpenses = state.filter(expense => expense.id !== id);
+            return [...updatedExpenses];
         }
+
     }
 });
 
-export const { initialiseExpense, addExpense, clearExpense } = expenseSlice.actions;
+export const { initialiseExpense, addExpense, clearExpense, removeExpense } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

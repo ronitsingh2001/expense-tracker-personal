@@ -4,6 +4,7 @@ import ExpenseList from "./ExpenseList";
 import { useSelector } from "react-redux";
 import { organizeExpensesByMonth } from "../utils/functions";
 import Loader from "./Loader";
+import Backdrop from "./Backdrop";
 
 const Home = () => {
   const expenseArray = useSelector((store) => store.expense);
@@ -12,9 +13,8 @@ const Home = () => {
 
   useEffect(() => {
     if(expenseArray){
-      console.log(expenseArray)
       let newExpenseObject = organizeExpensesByMonth(
-        expenseArray?.slice(0, 5) ?? []
+        expenseArray?.slice(0, 7) ?? []
         );
         setExpense(newExpenseObject);
       }
@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div className="h-[100vh] overflow-scroll bg-gradient-to-r from-[#171D1C] to-blue-900 flex pt-20 md:pt-28 flex-col md:flex-row p-4">
       {!user ? (
-        <Loader />
+        <Backdrop isOpen={true} />
       ) : (
         <>
           <div className="">

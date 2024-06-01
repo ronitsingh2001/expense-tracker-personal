@@ -6,7 +6,7 @@ const ExpenseList = ({ expenseArray, subFilter = 'DEFAULT', altered = false }) =
     <div className="w-full lg:w-3/4 px-1 lg:px-4 mb-4 lg:mb-0 mx-auto  overflow-y-scroll relative">
       {expenseArray?.length > 0 && altered && (
         <small className="font-semibold mb-4 text-white">
-          Last few expense
+          Last few expenses
         </small>
       )}
       {!expenseArray ? (

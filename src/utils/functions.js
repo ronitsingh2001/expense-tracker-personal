@@ -27,7 +27,6 @@ export const organizeExpensesByMonth = (expenses) => {
         }
     });
     MONTHEXPENSES = monthlyExpenses;
-    console.log(monthlyExpenses)
     return monthlyExpenses;
 };
 
