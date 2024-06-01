@@ -92,7 +92,7 @@ const Login = () => {
     <div className="w-full h-[100vh] bg-gradient-to-r from-[#171D1C] to-blue-900 flex justify-center items-center">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="bg-white/10 backdrop-blur-lg px-8 py-4 mx-10 rounded-lg border border-blue-300 shadow-xl shadow-blue-500/50 space-y-4 flex-1"
+        className="bg-white/10 backdrop-blur-lg px-8 py-4 mx-10 rounded-lg border border-blue-300 shadow-xl shadow-blue-500/50 space-y-4 flex-wrap flex-1 sm:flex-none"
         action=""
       >
         <h1 className="font-bold text-xl text-white text-center">

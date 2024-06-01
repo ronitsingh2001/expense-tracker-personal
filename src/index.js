@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Login from './Components/Login';
 import Home from './Components/Home';
 import Dashboard from './Components/Dashboard';
+import FileUpload from './Components/FileUpload';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -30,6 +31,10 @@ const appRouter = createBrowserRouter([
           {
               path: '/reports',
               element: <Dashboard reports={true} />
+          },
+          {
+            path: '/pdf-upload',
+            element: <FileUpload />
           }
       ]
   }

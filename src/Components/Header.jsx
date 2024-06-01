@@ -109,6 +109,12 @@ const Header = () => {
                       >
                         <Link to="/reports">Reports</Link>
                       </li>
+                      <li
+                        onClick={() => setDropdown(false)}
+                        className="text-black ps-4 pt-2 cursor-pointer"
+                      >
+                        <Link to="/pdf-upload">Upload statement</Link>
+                      </li>
                     </ul>
                     <button
                       onClick={logout}
