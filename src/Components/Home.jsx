@@ -12,6 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     if(expenseArray){
+      console.log(expenseArray)
       let newExpenseObject = organizeExpensesByMonth(
         expenseArray?.slice(0, 5) ?? []
         );

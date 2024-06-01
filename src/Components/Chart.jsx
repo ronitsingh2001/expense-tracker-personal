@@ -23,9 +23,62 @@ ChartJS.register(
 const options = {
   responsive: true,
   maintainAspectRatio: false,
+  scales: {
+    x: {
+      ticks: {
+        callback: function(value) {
+          return this.getLabelForValue(value).substring(0, 10); // Truncate long labels
+        },
+        maxRotation: 90,
+        minRotation: 45,
+      },
+    },
+    y: {
+      beginAtZero: true,
+      ticks: {
+        // Adjust step size or use a logarithmic scale if needed
+        // stepSize: 1000,
+        callback: function(value) {
+          if (value % 1 === 0) {
+            return value; // Show integer ticks only
+          }
+        }
+      },
+      afterDataLimits(scale) {
+        scale.min = 1; // Start the scale from zero
+        scale.max *= 1.1; // Add a little padding above the largest value
+      }
+    },
+  },
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+          return context.label + ': ' + context.raw;
+        }
+      }
+    },
+    legend: {
+      labels: {
+        font: {
+          size: 12,
+          weight: 'bold'
+        }
+      }
+    }
+  },
+  elements: {
+    bar: {
+      borderWidth: 1,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+      minBarLength: 2 // Minimum length for bars to be visible
+    }
+  }
 };
 
 function BarChart({ title, expenseArray, label }) {
+  console.log(label)
+  console.log(expenseArray)
   const [data, setData] = useState(null);
 
   const loadChart = () => {

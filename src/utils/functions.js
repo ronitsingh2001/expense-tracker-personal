@@ -6,7 +6,6 @@ export const organizeExpensesByMonth = (expenses) => {
     EXPENSES = expenses;
     if (expenses?.length < 1) return expenses;
     const monthlyExpenses = [];
-
     expenses.forEach((expense) => {
         const monthYear = new Date(expense.date).toLocaleString("default", {
             month: "long",
@@ -28,6 +27,7 @@ export const organizeExpensesByMonth = (expenses) => {
         }
     });
     MONTHEXPENSES = monthlyExpenses;
+    console.log(monthlyExpenses)
     return monthlyExpenses;
 };
 
@@ -51,7 +51,7 @@ export const organizeExpensesByCategories = () => {
 export const organizeExpensesByAmount = () => {
     let expense = EXPENSES;
     const amountExpense = [];
-    expense = expense.sort((a, b) => +b.amount - +a.amount);
+    expense = expense.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
     expense.forEach(x => {
         let amount = +x.amount;
         if (amount > 0 && amount < 200) {
@@ -123,8 +123,8 @@ export const getSubFilter = (filter) => {
 export const getIndividualExpenses = (expenseArray, key) => {
     let labels = [], amount = [];
     let index = expenseArray.findIndex(expense => expense.key === key);
-    if(index === -1){
-        return {labels:null,amount:null};
+    if (index === -1) {
+        return { labels: null, amount: null };
     }
     expenseArray[index].expenses.map(item => {
         labels.push(item.title);
@@ -143,4 +143,22 @@ export const getAmount = (expenseArray) => {
         amount.push(total);
     });
     return amount;
+};
+
+export const addExpenseToFirestore = (expenseArray) => {
+    return expenseArray.map(item => {
+        item.date = convertDateFormat(item.date);
+        return item;
+    });
+};
+
+const convertDateFormat = (dateString) => {
+    // Split the date string into day, month, and year
+    const [day, month, year] = dateString.split('/');
+
+    // If the year is in YY format, convert it to YYYY format
+    const fullYear = parseInt(year) < 50 ? '20' + year : '19' + year;
+
+    // Reconstruct the date string with the new year format
+    return `${fullYear}-${month}-${day}`;
 };

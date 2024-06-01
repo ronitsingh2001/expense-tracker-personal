@@ -29,11 +29,12 @@ const Header = () => {
   const fetchDataFromFirestore = async (userData) => {
     try {
       const querySnapshot = await getDocs(collection(db, userData.userId));
-      const dataList = [];
+      let dataList = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         dataList.push({ id: doc.id, ...doc.data() });
       });
+      dataList = dataList.sort((a, b) => new Date(b.date) - new Date(a.date));
       dispatch(initialiseExpense(dataList));
     } catch (e) {
       console.error("Error fetching documents: ", e);
