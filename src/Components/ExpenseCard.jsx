@@ -49,6 +49,7 @@ const ExpenseCard = ({ data, onEdit, onDelete }) => {
 
   const handleCancel = () => {
     setShowConfirmModal(false);
+    setShowEditModal(false);
   };
 
   useEffect(() => {
@@ -74,12 +75,12 @@ const ExpenseCard = ({ data, onEdit, onDelete }) => {
       </div>
       {isDropdownOpen && (
         <ul className="absolute right-0 mt-2 w-28 bg-blue-950 rounded-md shadow-xl z-50 overflow-hidden">
-          {/* <li
+          <li
             className="ps-2 py-1 cursor-pointer hover:bg-blue-900"
             onClick={handleEdit}
           >
             Edit
-          </li> */}
+          </li>
           <li
             className="ps-2 py-1 cursor-pointer hover:bg-blue-900"
             onClick={handleDelete}
@@ -89,16 +90,17 @@ const ExpenseCard = ({ data, onEdit, onDelete }) => {
         </ul>
       )}
       <small>{data?.date}</small>
-      <ConfirmModal
-        isOpen={showConfirmModal}
-        onCancel={handleCancel}
-        onConfirm={deleteRecord}
-        title={data?.title}
-      />
-      <EditModal 
-      isOpen={showEditModal}
-      onCancel={handleCancel}
-      />
+      {showConfirmModal && (
+        <ConfirmModal
+          isOpen={showConfirmModal}
+          onCancel={handleCancel}
+          onConfirm={deleteRecord}
+          title={data?.title}
+        />
+      )}
+      {showEditModal && (
+        <EditModal isOpen={showEditModal} data={data} onCancel={handleCancel} />
+      )}
     </div>
   );
 };
