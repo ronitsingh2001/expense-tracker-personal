@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useRef, useState } from "react";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addExpense,
-  removeExpense,
-  updateExpense,
-} from "../utils/expenseSlice";
+import { updateExpense } from "../utils/expenseSlice";
 import SelectWithAddOption from "./Select";
 import Backdrop from "./Backdrop";
 
@@ -30,10 +26,14 @@ const EditModal = ({ isOpen, onCancel, data }) => {
   ]);
 
   useEffect(() => {
-    if (options.findIndex((x) => x.value.toUpperCase() == data.category.toUpperCase()) === -1) {
+    if (
+      options.findIndex(
+        (x) => x.value.toUpperCase() === data.category.toUpperCase()
+      ) === -1
+    ) {
       handleCreate(data.category);
     }
-    handleChange({value:data.category, label: data.category});
+    handleChange({ value: data.category, label: data.category });
   }, []);
 
   if (!isOpen) {
